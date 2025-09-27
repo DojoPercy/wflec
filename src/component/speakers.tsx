@@ -73,9 +73,9 @@ const BoardSpeakers: React.FC = () => {
     nextArrow: <Arrow direction="right" />,
     prevArrow: <Arrow direction="left" />,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } },
-    ],
+    { breakpoint: 1280, settings: { slidesToShow: 2 } }, // tablets & small laptops
+    { breakpoint: 1024, settings: { slidesToShow: 1 } }, // force 1 per view below desktop
+  ],
   };
 
   return (
