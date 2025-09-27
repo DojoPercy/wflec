@@ -1,26 +1,178 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* Brand Colors */
+  --color-wflec-orange: #F2994A;
+  --color-wflec-red: #E94E1B;
+  --color-wflec-gold: #F5C042;
+  --color-wflec-gray: #4B5563;
+  --color-wflec-dark: #111827;
+  --color-wflec-white: #ffffff;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Semantic */
+  --color-primary: var(--color-wflec-orange);
+  --color-primary-dark: var(--color-wflec-red);
+  --color-primary-subtle: #fff4eb;
+
+  --color-success: #1cc444;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+  --color-info: #17a2b8;
+
+  /* Background / Foreground */
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+
+  /* Fonts */
+  --font-family-sans: var(--font-inter), system-ui, sans-serif;
+  --font-family-serif: var(--font-lora), serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-family-sans);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+ 
+
+  --background-image-gradient-alt: linear-gradient(
+    135deg,
+    var(--color-wflec-gold),
+    var(--color-wflec-red)
+  );
+
+  --background-image-gradient-dark: linear-gradient(
+    90deg,
+    var(--color-wflec-dark),
+    var(--color-wflec-gray)
+  );
+    /* stronger hero overlay to guarantee contrast */
+  --background-image-gradient-primary: linear-gradient(
+    180deg,
+    rgba(10,10,10,0.75) 0%,
+    rgba(17,24,39,0.72) 35%,
+    rgba(233,78,27,0.06) 100%
+  );
+
+  /* alternative: subtle vignette to darken edges */
+  --background-image-vignette: radial-gradient(
+    circle at 50% 40%,
+    rgba(0,0,0,0.0) 30%,
+    rgba(0,0,0,0.35) 60%,
+    rgba(0,0,0,0.70) 100%
+  );
+}
+
+/* optional additional helper class to blur/soften busy image */
+.hero-bg-soften {
+  filter: brightness(0.52) contrast(1.02) saturate(0.95) blur(2px);
+  will-change: filter;
+}
+
+/* make sure hero content sits above overlays */
+.hero-content {
+  z-index: 20;
+
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Light theme values */
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --primary: #F2994A; /* Orange */
+  --primary-dark: #E94E1B; /* Red */
+  --primary-foreground: #ffffff;
+
+  --secondary: #F5C042; /* Gold */
+  --secondary-foreground: #111827;
+
+  --accent: #4B5563; /* Gray */
+  --accent-foreground: #ffffff;
+
+  --muted: #f9fafb;
+  --muted-foreground: #6b7280;
+
+  --card: #ffffff;
+  --card-foreground: #171717;
+
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #E94E1B;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --primary: #F2994A;
+  --primary-dark: #E94E1B;
+  --primary-foreground: #000000;
+
+  --secondary: #F5C042;
+  --secondary-foreground: #111827;
+
+  --accent: #4B5563;
+  --accent-foreground: #ffffff;
+
+  --muted: #262626;
+  --muted-foreground: #9ca3af;
+
+  --card: #111827;
+  --card-foreground: #ededed;
+
+  --popover: #171717;
+  --popover-foreground: #ededed;
+
+  --border: #262626;
+  --input: #171717;
+  --ring: #F2994A;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
