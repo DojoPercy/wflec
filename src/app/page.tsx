@@ -6,6 +6,7 @@ import ExpectedOutcomes from '@/component/outcomes'
 import { KeyPillars } from '@/component/pillars'
 import BoardSpeakers from '@/component/speakers'
 import SponsorshipOpportunities from '@/component/sponsorship'
+import Footer from '@/component/footer'
 import React from 'react'
 
 const page = () => {
@@ -18,7 +19,8 @@ const page = () => {
     <TargetAudience/>
     <BoardSpeakers/>
     <ExpectedOutcomes/>
-    {/* <SponsorshipOpportunities/> */}
+    <SponsorshipOpportunities/>
+    <Footer/>
     </>
   )
 }

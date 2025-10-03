@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion, Variants } from 'framer-motion';
 import { GraduationCap, Landmark, Lightbulb, Users } from 'lucide-react';
+import { useRegistration } from '@/context/registrationContext';
 
 /**
  * WFLEC — Hero + KeyPillars (with image placeholders)
@@ -99,8 +100,10 @@ const PILLARS = [
 ];
 
 export const KeyPillars: React.FC = () => {
+  const { openModal } = useRegistration();
+  
   return (
-    <section className="relative py-20 bg-gradient-to-b from-[#05060a] to-[#0b0d11] text-white">
+    <section id="about" className="relative py-20 bg-gradient-to-b from-[#05060a] to-[#0b0d11] text-white">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }} variants={fadeUp}>
           <p className="text-sm uppercase tracking-wider text-[#F6C15F]/90">Why WFLEC 2026</p>
@@ -133,9 +136,9 @@ export const KeyPillars: React.FC = () => {
 </motion.div>
 
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }} variants={fadeUp} className="mt-12">
-          <a href="#agenda" className="inline-block px-8 py-3 rounded-2xl bg-gradient-to-r from-[#F6C15F] to-[#F3911A] text-[#06121B] font-semibold">
-            See Program Highlights
-          </a>
+          <button onClick={openModal} className="inline-block px-8 py-3 rounded-2xl bg-gradient-to-r from-[#F6C15F] to-[#F3911A] text-[#06121B] font-semibold hover:scale-105 transition-transform shadow-lg">
+            Register Your Interest
+          </button>
         </motion.div>
       </div>
     </section>

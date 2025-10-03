@@ -7,6 +7,7 @@ import Image from 'next/image';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
+import { useRegistration } from '@/context/registrationContext';
 
 const EASE_OUT = [0.25, 0.1, 0.25, 1] as const;
 
@@ -63,6 +64,8 @@ const Arrow = ({ onClick, direction }: any) => (
 );
 
 const BoardSpeakers: React.FC = () => {
+  const { openModal } = useRegistration();
+  
   const settings = {
   dots: true,
   infinite: true,
@@ -94,7 +97,7 @@ const BoardSpeakers: React.FC = () => {
 
 
   return (
-    <section className="relative py-24 bg-gradient-to-b from-[#0E1015] to-[#16191f] text-white overflow-hidden">
+    <section id="speakers" className="relative py-24 bg-gradient-to-b from-[#0E1015] to-[#16191f] text-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <motion.div
@@ -157,12 +160,12 @@ const BoardSpeakers: React.FC = () => {
           variants={fadeUp}
           className="mt-16 flex justify-center"
         >
-          <a
-            href="#advisory"
+          <button
+            onClick={openModal}
             className="px-8 py-3 rounded-2xl bg-gradient-to-r from-[#F6C15F] to-[#F3911A] text-[#06121B] font-semibold shadow-lg hover:scale-[1.02] transition-transform"
           >
-            View Full Board
-          </a>
+            Register Your Interest
+          </button>
         </motion.div>
       </div>
     </section>

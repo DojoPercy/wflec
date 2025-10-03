@@ -3,13 +3,13 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion, Variants } from 'framer-motion';
+import { useRegistration } from '@/context/registrationContext';
+import { useProtectedDownload } from '@/hooks/useProtectedDownload';
 
 type HeroProps = {
   backgroundImage: string;
   logoSrc: string;
   prospectusHref?: string;
-  onPrimaryCTAClick?: () => void;
-  onSecondaryCTAClick?: () => void;
   logoBadge?: string;
 };
 
@@ -26,12 +26,12 @@ type HeroProps = {
 const Hero: React.FC<HeroProps> = ({
   backgroundImage,
   logoSrc,
-  prospectusHref = '/sponsorship-prospectus.pdf',
-  onPrimaryCTAClick,
-  onSecondaryCTAClick,
+  prospectusHref = '/files/pdf.pdf',
   logoBadge,
 }) => {
   const reduceMotion = useReducedMotion();
+  const { openModal } = useRegistration();
+  const { handleDownload } = useProtectedDownload();
 
   const container: Variants = reduceMotion
     ? { hidden: {}, enter: {} }
@@ -46,7 +46,7 @@ const Hero: React.FC<HeroProps> = ({
     : { hidden: { opacity: 0, scale: 0.96 }, enter: { opacity: 1, scale: 1, transition: { duration: 0.55, ease: 'easeOut' } } };
 
   return (
-    <header className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <header id="top" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div aria-hidden className="absolute inset-0 -z-20">
         <Image
@@ -71,7 +71,7 @@ const Hero: React.FC<HeroProps> = ({
         <div className="max-w-5xl mx-auto flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* Logo */}
           <motion.div variants={popIn} className="flex flex-col items-center lg:items-start">
-            <Image src={logoSrc} alt="WFLEC Logo" width={280} height={80} priority className="h-32 w-auto scale-200" />
+            <Image src={logoSrc} alt="WFLEC Logo" width={280} height={80} priority className="h-10 w-auto scale-200" />
             {logoBadge && (
               <span className="mt-3 inline-block rounded-full bg-white/10 text-white/90 px-3 py-1 text-xs md:text-sm">
                 {logoBadge}
@@ -101,20 +101,19 @@ const Hero: React.FC<HeroProps> = ({
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
             <motion.button
               variants={popIn}
-              onClick={onPrimaryCTAClick}
+              onClick={openModal}
               className="px-8 py-3 rounded-2xl bg-gradient-to-r from-[#F6C15F] to-[#F3911A] text-[#06121B] font-semibold text-lg shadow-lg hover:scale-[1.02] transition-transform"
             >
               Register Interest
             </motion.button>
 
-            <motion.a
+            <motion.button
               variants={popIn}
-              href={prospectusHref}
-              onClick={onSecondaryCTAClick}
+              onClick={() => handleDownload('/pdf.pdf', 'files/pdf.pdf')}
               className="px-6 py-3 rounded-2xl border border-white/30 text-white/95 text-base hover:bg-white/5 transition"
             >
               Download Prospectus
-            </motion.a>
+            </motion.button>
           </motion.div>
 
           {/* Supporting note */}

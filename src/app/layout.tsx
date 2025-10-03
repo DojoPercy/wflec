@@ -2,6 +2,11 @@
 
 import './globals.css'
 import { ReactNode } from 'react'
+import Header from '@/component/header'
+import BackToTop from '@/component/backToTop'
+import { RegistrationProvider } from '@/context/registrationContext'
+import RegistrationModal from '@/component/registrationModal'
+import RegistrationWrapper from '@/component/registrationWrapper'
 
 // Font imports (example)
 import { Inter, Lora } from 'next/font/google'
@@ -27,13 +32,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-background text-foreground antialiased`}>
-        
-          {/* <Header /> */}
+        <RegistrationProvider>
+          <Header />
           <main className="min-h-screen">
             {children}
           </main>
-          {/* <Footer /> */}
-        
+          <BackToTop />
+          <RegistrationWrapper />
+        </RegistrationProvider>
       </body>
     </html>
   )

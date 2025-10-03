@@ -45,8 +45,14 @@ const OUTCOMES = [
 
 const ExpectedOutcomes: React.FC = () => {
   return (
-    <section className="relative py-24 bg-[#0E1015] text-white">
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+    <section className="relative py-24 bg-[#0E1015] text-white overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#F6C15F]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#F3911A]/5 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial="hidden"
@@ -79,16 +85,17 @@ const ExpectedOutcomes: React.FC = () => {
             <motion.div
               key={idx}
               variants={fadeUp}
-              className="mb-12 ml-6 relative"
+              whileHover={{ x: 8 }}
+              className="mb-12 ml-6 relative group cursor-pointer"
             >
               {/* Icon */}
-              <div className="absolute -left-10 top-0 flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-[#F6C15F] to-[#F3911A] shadow-lg">
+              <div className="absolute -left-10 top-0 flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-[#F6C15F] to-[#F3911A] shadow-lg group-hover:shadow-[#F6C15F]/40 transition-shadow">
                 <Icon className="h-5 w-5 text-[#06121B]" strokeWidth={2.5} />
               </div>
 
               {/* Text */}
-              <h3 className="text-xl font-semibold mb-2">{title}</h3>
-              <p className="text-white/75 text-base">{copy}</p>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-[#F6C15F] transition-colors">{title}</h3>
+              <p className="text-white/75 text-base group-hover:text-white/90 transition-colors">{copy}</p>
             </motion.div>
           ))}
 
