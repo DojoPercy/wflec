@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Landmark, Building2, Globe2 } from 'lucide-react';
 import Image from 'next/image';
+import { useRegistration } from '@/context/registrationContext';
 
 const EASE_OUT = [0.25, 0.1, 0.25, 1] as const;
 
@@ -46,6 +47,8 @@ const AUDIENCE = [
 ];
 
 const TargetAudience: React.FC = () => {
+  const { openModal } = useRegistration();
+  
   return (
     <section className="relative py-24 text-white overflow-hidden">
       {/* Background image with gradient overlay */}
@@ -110,17 +113,18 @@ const TargetAudience: React.FC = () => {
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeUp}
-              className="flex items-start gap-6 border-t border-white/10 pt-8"
+              whileHover={{ x: 10, backgroundColor: 'rgba(246, 193, 95, 0.03)' }}
+              className="flex items-start gap-6 border-t border-white/10 pt-8 px-4 py-2 rounded-lg transition-colors cursor-pointer group"
             >
               {/* Icon */}
-              <div className="flex-shrink-0 h-14 w-14 rounded-full bg-gradient-to-r from-[#F6C15F] to-[#F3911A] flex items-center justify-center shadow-lg">
+              <div className="flex-shrink-0 h-14 w-14 rounded-full bg-gradient-to-r from-[#F6C15F] to-[#F3911A] flex items-center justify-center shadow-lg group-hover:shadow-[#F6C15F]/40 transition-shadow group-hover:scale-110 duration-300">
                 <Icon className="h-7 w-7 text-[#06121B]" strokeWidth={2.5} />
               </div>
 
               {/* Text */}
               <div>
-                <h3 className="text-lg font-semibold mb-1">{title}</h3>
-                <p className="text-white/80">{desc}</p>
+                <h3 className="text-lg font-semibold mb-1 group-hover:text-[#F6C15F] transition-colors">{title}</h3>
+                <p className="text-white/80 group-hover:text-white/95 transition-colors">{desc}</p>
               </div>
             </motion.div>
           ))}
@@ -134,12 +138,12 @@ const TargetAudience: React.FC = () => {
           variants={fadeUp}
           className="mt-20 flex justify-center"
         >
-          <a
-            href="#register"
+          <button
+            onClick={openModal}
             className="px-8 py-3 rounded-2xl bg-gradient-to-r from-[#F6C15F] to-[#F3911A] text-[#06121B] font-semibold shadow-lg hover:scale-[1.02] transition-transform"
           >
             Join the WFLEC 2026 Audience
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>

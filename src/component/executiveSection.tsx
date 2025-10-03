@@ -51,8 +51,14 @@ const THEMES = [
 
 const ObjectivesThemes: React.FC = () => {
   return (
-    <section className="relative py-24 bg-[#0E1015] text-white">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
+    <section className="relative py-24 bg-[#0E1015] text-white overflow-hidden">
+      {/* Decorative gradient blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-40 right-20 w-80 h-80 bg-[#F3911A]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 left-20 w-96 h-96 bg-[#F6C15F]/5 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
         {/* Objectives */}
         <motion.div
           initial="hidden"
@@ -79,12 +85,13 @@ const ObjectivesThemes: React.FC = () => {
               <motion.li
                 key={i}
                 variants={fadeUp}
-                className="flex items-start gap-6"
+                whileHover={{ x: 10, backgroundColor: 'rgba(246, 193, 95, 0.02)' }}
+                className="flex items-start gap-6 px-4 py-3 rounded-lg transition-colors cursor-pointer group"
               >
-                <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#F6C15F] to-[#F3911A]">
+                <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#F6C15F] to-[#F3911A] group-hover:scale-110 transition-transform">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-lg text-white/85">{o}</p>
+                <p className="text-lg text-white/85 group-hover:text-white/95 transition-colors">{o}</p>
               </motion.li>
             ))}
           </motion.ol>
@@ -115,12 +122,13 @@ const ObjectivesThemes: React.FC = () => {
               <motion.div
                 key={t.title}
                 variants={fadeUp}
-                className={`py-8 ${i % 2 === 0 ? 'text-left' : 'text-right'}`}
+                whileHover={{ scale: 1.02, backgroundColor: 'rgba(246, 193, 95, 0.03)' }}
+                className={`py-8 px-6 rounded-lg transition-all cursor-pointer group ${i % 2 === 0 ? 'text-left' : 'text-right'}`}
               >
-                <h3 className="text-2xl font-semibold text-[#F6C15F] mb-2">
+                <h3 className="text-2xl font-semibold text-[#F6C15F] mb-2 group-hover:text-[#F3911A] transition-colors">
                   {t.title}
                 </h3>
-                <p className="text-white/80 max-w-2xl mx-auto">{t.copy}</p>
+                <p className="text-white/80 max-w-2xl mx-auto group-hover:text-white/95 transition-colors">{t.copy}</p>
               </motion.div>
             ))}
           </motion.div>

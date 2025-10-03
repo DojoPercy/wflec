@@ -176,3 +176,33 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Smooth scrolling enhancement */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0E1015;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F6C15F, #F3911A);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #F3911A, #E94E1B);
+}
+
+/* Improved text selection */
+::selection {
+  background-color: #F6C15F;
+  color: #06121B;
+}

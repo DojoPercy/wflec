@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Crown, Star, Award, Medal } from 'lucide-react';
+import { useProtectedDownload } from '@/hooks/useProtectedDownload';
 
 const EASE_OUT = [0.25, 0.1, 0.25, 1] as const;
 
@@ -63,6 +64,8 @@ const TIERS = [
 ];
 
 const SponsorshipOpportunities: React.FC = () => {
+  const { handleDownload } = useProtectedDownload();
+  
   return (
     <section className="relative py-24 bg-[#14161d] text-white">
       <div className="max-w-6xl mx-auto px-6 lg:px-12">
@@ -119,12 +122,12 @@ const SponsorshipOpportunities: React.FC = () => {
 
               {/* CTA */}
               <div className="mt-6">
-                <a
-                  href="/sponsorship-prospectus.pdf"
+                <button
+                  onClick={() => handleDownload('Sponsorship Prospectus- WFLEC 2026 –.pdf', 'WFLEC-2026-Sponsorship-Prospectus.pdf')}
                   className="block w-full text-center px-6 py-3 rounded-xl bg-gradient-to-r from-[#F6C15F] to-[#F3911A] text-[#06121B] font-semibold hover:scale-[1.02] transition-transform"
                 >
                   Enquire Now
-                </a>
+                </button>
               </div>
             </motion.div>
           ))}
@@ -138,12 +141,12 @@ const SponsorshipOpportunities: React.FC = () => {
           variants={fadeUp}
           className="mt-16 flex justify-center"
         >
-          <a
-            href="/sponsorship-prospectus.pdf"
+          <button
+            onClick={() => handleDownload('Sponsorship Prospectus- WFLEC 2026 –.pdf', 'WFLEC-2026-Sponsorship-Prospectus.pdf')}
             className="px-8 py-3 rounded-2xl bg-gradient-to-r from-[#F6C15F] to-[#F3911A] text-[#06121B] font-semibold shadow-lg hover:scale-[1.02] transition-transform"
           >
             Download Full Prospectus
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>
